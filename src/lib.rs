@@ -71,15 +71,18 @@ pub fn time_inside(value:&entrys) -> NaiveTime {
 
 #[cfg(test)]
 mod tests {
+	use super::*;
     #[test]
     fn it_works() {
         assert_eq!(2 + 2, 4);
     }
+    #[test]
     fn test_unifier(){
-		let test_vector = vec!["a","cute","cat"];
+		let test_vector = vec!["a".to_string(),"cute".to_string(),"cat".to_string()];
 		let test_string = unifier(test_vector);
-		assert_eq!(test_string,"a cute cat".to_string());
+		assert_eq!(test_string," a cute cat".to_string());
 	}
+	#[test]
 	fn test_time_inside(){
 		let original_date_time = DateTime::<Utc>::from_utc(NaiveDateTime::from_timestamp(61, 0), Utc);
 		let title = "timmy".to_string();
@@ -88,7 +91,7 @@ mod tests {
 		let other = "sdnjabjlkvkjbaj".to_string();
 		
 		let tester = Todo::new(Some(title), datetime, Some(list), Some(other));
-		let time = tester.time_inside();
+		let time = time_inside(&entrys::Todo(tester));
 		assert_eq!(time,original_date_time.time());
 	}
 	
